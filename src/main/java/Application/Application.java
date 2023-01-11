@@ -6,10 +6,12 @@
 package Application;
 
 import Views.FrmQLProducts;
+import Views.table;
 
 public class Application {
     
     public static void main(String[] args) {
-        new FrmQLProducts().setVisible(true);
+//        new FrmQLProducts().setVisible(true);
+        new table().setVisible(true);
     }
 }

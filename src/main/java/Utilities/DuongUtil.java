@@ -3,6 +3,7 @@ package Utilities;
 
 import DomainModels.Category;
 import DomainModels.Product;
+import DomainModels.ProductS;
 import java.util.Properties;
 
 import org.hibernate.SessionFactory;
@@ -27,7 +28,7 @@ public class DuongUtil {
 		properties.put(Environment.URL,
 				"jdbc:sqlserver://localhost:1433;databaseName=assDAM;");
 		properties.put(Environment.USER, "sa");
-		properties.put(Environment.PASS, "123456");
+		properties.put(Environment.PASS, "1");
 		properties.put(Environment.SHOW_SQL, "true");
 		// tự động tạo DB
 //         properties.put(Environment.HBM2DDL_AUTO, "create"); //chỉ dùng khi code first
@@ -37,6 +38,7 @@ public class DuongUtil {
 		// Khai báo Class được ánh xạ
 		// Đánh dấu các class sẽ được thêm vào hibernate
 		conf.addAnnotatedClass(Product.class);
+                conf.addAnnotatedClass(ProductS.class);
 		conf.addAnnotatedClass(Category.class); 
 
 		ServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
