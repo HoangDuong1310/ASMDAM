@@ -5,13 +5,14 @@
  */
 package Application;
 
-import Views.FrmQLProducts;
-import Views.table;
+import Views.FrmMauSac;
+import Views.FrmSanPham;
 
 public class Application {
     
     public static void main(String[] args) {
 //        new FrmQLProducts().setVisible(true);
-        new table().setVisible(true);
+//        new FrmSanPham().setVisible(true);
+        new FrmMauSac().setVisible(true);
     }
 }

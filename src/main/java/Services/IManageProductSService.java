@@ -4,7 +4,7 @@
  */
 package Services;
 
-import ViewModels.FromProduct;
+import Dto.FromProduct;
 import java.util.List;
 
 /**
@@ -16,5 +16,5 @@ public interface IManageProductSService {
     FromProduct getProductById(String id);
     FromProduct createNewProduct(FromProduct product);
     FromProduct updateProductById(FromProduct product);
-    String deleteProductById(String id);
+    boolean deleteProductById(String id);
 }

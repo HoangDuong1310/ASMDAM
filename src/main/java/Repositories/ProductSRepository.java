@@ -4,7 +4,7 @@
  */
 package Repositories;
 
-import DomainModels.ProductS;
+import Entities.ProductS;
 import Utilities.DuongUtil;
 import java.util.List;
 import org.hibernate.Session;
@@ -33,7 +33,7 @@ public class ProductSRepository implements IProductSRepository {
     public ProductS findByID(String id) {
         ProductS productS;
         try (Session session = DuongUtil.getFactory().openSession()) {
-            String hql = "SELECT p FROM Products p WHERE p.id = :id";
+            String hql = "SELECT p FROM ProductS p WHERE p.id = :id";
             Query<ProductS> query = session.createQuery(hql, ProductS.class);
             query.setParameter("id", id);
             productS = query.getSingleResult();
@@ -62,23 +62,23 @@ public class ProductSRepository implements IProductSRepository {
     }
 
     @Override
-    public String delete(String id) {
+    public boolean delete(String id) {
         try (Session session = DuongUtil.getFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
             try {
-                Query query = session.createQuery("DELETE Products p WHERE p.id = :id" , ProductS.class);
+                Query query = session.createQuery("DELETE ProductS p WHERE p.id = :id");
                 query.setParameter("id", id);
                 int result = query.executeUpdate();
-               if (result == 0) {
-                    id = "0";
+                if (result == 0) {
+                    return true;
                 }
-                 trans.commit();
+                trans.commit();
             } catch (Exception e) {
-                 id = "-1";
+                return false;
             }
+            return true;
         }
-        return id;
     }
 
     @Override

@@ -4,11 +4,10 @@
  */
 package Services;
 
-import DomainModels.ProductS;
+import Entities.ProductS;
 import Repositories.IProductSRepository;
-import Repositories.ProductRepository;
 import Repositories.ProductSRepository;
-import ViewModels.FromProduct;
+import Dto.FromProduct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,22 +38,25 @@ public class ManagerProductSService implements IManageProductSService {
     @Override
     public FromProduct getProductById(String id) {
         var x = _IProductSRepository.findByID(id);
-        return null;
+        return new FromProduct(x.getId(), x.getMa(), x.getTen());
     }
 
     @Override
     public FromProduct createNewProduct(FromProduct product) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        product.setId(null);
+        var x = _IProductSRepository.save(new ProductS(product.getId(), product.getMa(), product.getTen()));
+        return new FromProduct(x.getId(), x.getMa(), x.getTen());
     }
 
     @Override
     public FromProduct updateProductById(FromProduct product) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        var x = _IProductSRepository.save(new ProductS(product.getId(), product.getMa(), product.getTen()));
+        return new FromProduct(x.getId(), x.getMa(), x.getTen());
     }
 
     @Override
-    public String deleteProductById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean deleteProductById(String id) {
+        return _IProductSRepository.delete(id);
     }
 
 }

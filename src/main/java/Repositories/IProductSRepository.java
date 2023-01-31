@@ -4,7 +4,7 @@
  */
 package Repositories;
 
-import DomainModels.ProductS;
+import Entities.ProductS;
 import java.util.List;
 
 /**
@@ -19,7 +19,7 @@ public interface IProductSRepository {
 
     ProductS save(ProductS productS);
 
-    String delete(String id);
+    boolean delete(String id);
 
     public void save(String id, String ma, String ten);
 
