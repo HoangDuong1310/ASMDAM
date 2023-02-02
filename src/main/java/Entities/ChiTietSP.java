@@ -14,7 +14,7 @@ public class ChiTietSP {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdSP")
-    private ProductS idSP;
+    private Product idSP;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdNsx")
@@ -52,11 +52,11 @@ public class ChiTietSP {
         this.id = id;
     }
 
-    public ProductS getIdSP() {
+    public Product getIdSP() {
         return idSP;
     }
 
-    public void setIdSP(ProductS idSP) {
+    public void setIdSP(Product idSP) {
         this.idSP = idSP;
     }
 

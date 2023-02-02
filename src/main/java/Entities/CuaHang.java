@@ -1,17 +1,22 @@
 package Entities;
 
+import java.io.Serializable;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.UUID;
+import javax.persistence.GeneratedValue;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class CuaHang {
+public class CuaHang implements Serializable{
     @Id
-    @Column(name = "Id", nullable = false)
-    private UUID id;
+    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "Id", columnDefinition = "uniqueidentifier")
+    private String id;
 
     @Column(name = "Ma", length = 20)
     private String ma;
@@ -32,11 +37,23 @@ public class CuaHang {
     @Column(name = "QuocGia", length = 50)
     private String quocGia;
 
-    public UUID getId() {
+    public CuaHang() {
+    }
+
+    public CuaHang(String id, String ma, String ten, String diaChi, String thanhPho, String quocGia) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.diaChi = diaChi;
+        this.thanhPho = thanhPho;
+        this.quocGia = quocGia;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -80,4 +97,10 @@ public class CuaHang {
         this.quocGia = quocGia;
     }
 
+    @Override
+    public String toString() {
+        return "CuaHang{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", diaChi=" + diaChi + ", thanhPho=" + thanhPho + ", quocGia=" + quocGia + '}';
+    }
+
+    
 }

@@ -1,8 +1,12 @@
 
 package Utilities;
 
+import Entities.ChucVu;
+import Entities.CuaHang;
+import Entities.KhachHang;
 import Entities.MauSac;
-import Entities.ProductS;
+import Entities.NhanVien;
+import Entities.Product;
 import java.util.Properties;
 
 import org.hibernate.SessionFactory;
@@ -36,8 +40,12 @@ public class DuongUtil {
 
 		// Khai báo Class được ánh xạ
 		// Đánh dấu các class sẽ được thêm vào hibernate
-                conf.addAnnotatedClass(ProductS.class);
+                conf.addAnnotatedClass(Product.class);
                 conf.addAnnotatedClass(MauSac.class);
+                conf.addAnnotatedClass(ChucVu.class);
+                conf.addAnnotatedClass(CuaHang.class);
+                conf.addAnnotatedClass(NhanVien.class);
+                conf.addAnnotatedClass(KhachHang.class);
 		ServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
 		FACTORY = conf.buildSessionFactory(registry);
 

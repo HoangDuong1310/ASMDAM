@@ -1,17 +1,21 @@
 package Entities;
 
+import java.io.Serializable;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.UUID;
+import javax.persistence.GeneratedValue;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class ChucVu {
+public class ChucVu implements Serializable{
     @Id
-    @Column(name = "Id", nullable = false)
-    private UUID id;
+    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "Id", columnDefinition = "uniqueidentifier")
+    private String id;
 
     @Column(name = "Ma", length = 20)
     private String ma;
@@ -20,11 +24,20 @@ public class ChucVu {
     @Column(name = "Ten", length = 50)
     private String ten;
 
-    public UUID getId() {
+    public ChucVu(String id, String ma, String ten) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+    }
+
+    public ChucVu() {
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -44,4 +57,7 @@ public class ChucVu {
         this.ten = ten;
     }
 
+    
+
+    
 }

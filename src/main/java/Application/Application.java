@@ -5,14 +5,18 @@
  */
 package Application;
 
+import Views.FrmChucVu;
+import Views.FrmCuaHang;
 import Views.FrmMauSac;
 import Views.FrmSanPham;
 
 public class Application {
-    
+
     public static void main(String[] args) {
 //        new FrmQLProducts().setVisible(true);
 //        new FrmSanPham().setVisible(true);
-        new FrmMauSac().setVisible(true);
+//        new FrmMauSac().setVisible(true);
+//        new FrmChucVu().setVisible(true);
+        new FrmCuaHang().setVisible(true);
     }
 }

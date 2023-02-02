@@ -4,7 +4,7 @@
  */
 package Repositories;
 
-import Entities.ProductS;
+import Entities.Product;
 import java.util.List;
 
 /**
@@ -13,11 +13,11 @@ import java.util.List;
  */
 public interface IProductSRepository {
 
-    List<ProductS> findAll();
+    List<Product> findAll();
 
-    ProductS findByID(String id);
+    Product findByID(String id);
 
-    ProductS save(ProductS productS);
+    Product save(Product productS);
 
     boolean delete(String id);
 

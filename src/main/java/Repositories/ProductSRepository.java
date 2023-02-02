@@ -4,7 +4,7 @@
  */
 package Repositories;
 
-import Entities.ProductS;
+import Entities.Product;
 import Utilities.DuongUtil;
 import java.util.List;
 import org.hibernate.Session;
@@ -18,11 +18,11 @@ import org.hibernate.query.Query;
 public class ProductSRepository implements IProductSRepository {
 
     @Override
-    public List<ProductS> findAll() {
-        List<ProductS> products;
+    public List<Product> findAll() {
+        List<Product> products;
         try (Session session = DuongUtil.getFactory().openSession()) {
             String hql = "FROM ProductS";
-            Query<ProductS> query = session.createQuery(hql, ProductS.class);
+            Query<Product> query = session.createQuery(hql, Product.class);
             products = query.getResultList();
         }
         return products;
@@ -30,11 +30,11 @@ public class ProductSRepository implements IProductSRepository {
     }
 
     @Override
-    public ProductS findByID(String id) {
-        ProductS productS;
+    public Product findByID(String id) {
+        Product productS;
         try (Session session = DuongUtil.getFactory().openSession()) {
             String hql = "SELECT p FROM ProductS p WHERE p.id = :id";
-            Query<ProductS> query = session.createQuery(hql, ProductS.class);
+            Query<Product> query = session.createQuery(hql, Product.class);
             query.setParameter("id", id);
             productS = query.getSingleResult();
         }
@@ -42,7 +42,7 @@ public class ProductSRepository implements IProductSRepository {
     }
 
     @Override
-    public ProductS save(ProductS productS) {
+    public Product save(Product productS) {
         try (Session session = DuongUtil.getFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
