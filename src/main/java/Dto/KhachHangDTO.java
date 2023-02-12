@@ -1,55 +1,29 @@
-package Entities;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Dto;
 
-import org.hibernate.annotations.Nationalized;
-
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-public class KhachHang {
-    @Id
-    @Column(name = "Id", nullable = false)
-    private String id;
+/**
+ *
+ * @author hrska
+ */
+public class KhachHangDTO {
+            private String id;
+            private String ma;
+            private String ten;
+            private String tenDem;
+            private String ho;
+            private Date ngaySinh;
+            private String sdt;
+            private String diaChi;
+            private String thanhPho;
+            private String quocGia;
+            private String matKhau;
 
-    @Column(name = "Ma", length = 20)
-    private String ma;
-
-    @Nationalized
-    @Column(name = "Ten", length = 30)
-    private String ten;
-
-    @Nationalized
-    @Column(name = "TenDem", length = 30)
-    private String tenDem;
-
-    @Nationalized
-    @Column(name = "Ho", length = 30)
-    private String ho;
-
-    @Convert(disableConversion = true)
-    @Column(name = "NgaySinh")
-    private Date  ngaySinh;
-
-    @Column(name = "Sdt", length = 30)
-    private String sdt;
-
-    @Nationalized
-    @Column(name = "DiaChi", length = 100)
-    private String diaChi;
-
-    @Nationalized
-    @Column(name = "ThanhPho", length = 50)
-    private String thanhPho;
-
-    @Nationalized
-    @Column(name = "QuocGia", length = 50)
-    private String quocGia;
-
-    @Lob
-    @Column(name = "MatKhau")
-    private String matKhau;
-
-    public KhachHang(String id, String ma, String ten, String tenDem, String ho, Date ngaySinh, String sdt, String diaChi, String thanhPho, String quocGia, String matKhau) {
+    public KhachHangDTO(String id, String ma, String ten, String tenDem, String ho, Date ngaySinh, String sdt, String diaChi, String thanhPho, String quocGia, String matKhau) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -63,7 +37,7 @@ public class KhachHang {
         this.matKhau = matKhau;
     }
 
-    public KhachHang() {
+    public KhachHangDTO() {
     }
 
     public String getId() {
@@ -156,9 +130,8 @@ public class KhachHang {
 
     @Override
     public String toString() {
-        return "KhachHang{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", tenDem=" + tenDem + ", ho=" + ho + ", ngaySinh=" + ngaySinh + ", sdt=" + sdt + ", diaChi=" + diaChi + ", thanhPho=" + thanhPho + ", quocGia=" + quocGia + ", matKhau=" + matKhau + '}';
+        return "KhachHangDTO{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", tenDem=" + tenDem + ", ho=" + ho + ", ngaySinh=" + ngaySinh + ", sdt=" + sdt + ", diaChi=" + diaChi + ", thanhPho=" + thanhPho + ", quocGia=" + quocGia + ", matKhau=" + matKhau + '}';
     }
 
-   
-
+         
 }
