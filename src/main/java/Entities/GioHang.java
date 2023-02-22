@@ -4,20 +4,22 @@ import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.UUID;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class GioHang {
     @Id
-    @Column(name = "Id", nullable = false)
-    private UUID id;
+    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "Id", columnDefinition = "uniqueidentifier")
+    private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdKH")
     private KhachHang idKH;
 
     @Column(name = "IdNV")
-    private UUID idNV;
+    private String idNV;
 
     @Column(name = "Ma", length = 20)
     private String ma;
@@ -44,11 +46,11 @@ public class GioHang {
     @Column(name = "TinhTrang")
     private Integer tinhTrang;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -60,11 +62,11 @@ public class GioHang {
         this.idKH = idKH;
     }
 
-    public UUID getIdNV() {
+    public String getIdNV() {
         return idNV;
     }
 
-    public void setIdNV(UUID idNV) {
+    public void setIdNV(String idNV) {
         this.idNV = idNV;
     }
 
@@ -123,5 +125,28 @@ public class GioHang {
     public void setTinhTrang(Integer tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
+
+    public GioHang() {
+    }
+
+    public GioHang(String id, KhachHang idKH, String idNV, String ma, LocalDate ngayTao, LocalDate ngayThanhToan, String tenNguoiNhan, String diaChi, String sdt, Integer tinhTrang) {
+        this.id = id;
+        this.idKH = idKH;
+        this.idNV = idNV;
+        this.ma = ma;
+        this.ngayTao = ngayTao;
+        this.ngayThanhToan = ngayThanhToan;
+        this.tenNguoiNhan = tenNguoiNhan;
+        this.diaChi = diaChi;
+        this.sdt = sdt;
+        this.tinhTrang = tinhTrang;
+    }
+
+    @Override
+    public String toString() {
+        return "GioHang{" + "id=" + id + ", idKH=" + idKH + ", idNV=" + idNV + ", ma=" + ma + ", ngayTao=" + ngayTao + ", ngayThanhToan=" + ngayThanhToan + ", tenNguoiNhan=" + tenNguoiNhan + ", diaChi=" + diaChi + ", sdt=" + sdt + ", tinhTrang=" + tinhTrang + '}';
+    }
+    
+    
 
 }

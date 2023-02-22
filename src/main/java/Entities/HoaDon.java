@@ -5,12 +5,15 @@ import org.hibernate.annotations.Nationalized;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class HoaDon {
     @Id
-    @Column(name = "Id", nullable = false)
-    private UUID id;
+    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "Id", columnDefinition = "uniqueidentifier")
+    private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdKH")
@@ -53,11 +56,29 @@ public class HoaDon {
     @Column(name = "Sdt", length = 30)
     private String sdt;
 
-    public UUID getId() {
+    public HoaDon() {
+    }
+
+    public HoaDon(String id, KhachHang idKH, NhanVien idNV, String ma, LocalDate ngayTao, LocalDate ngayThanhToan, LocalDate ngayShip, LocalDate ngayNhan, Integer tinhTrang, String tenNguoiNhan, String diaChi, String sdt) {
+        this.id = id;
+        this.idKH = idKH;
+        this.idNV = idNV;
+        this.ma = ma;
+        this.ngayTao = ngayTao;
+        this.ngayThanhToan = ngayThanhToan;
+        this.ngayShip = ngayShip;
+        this.ngayNhan = ngayNhan;
+        this.tinhTrang = tinhTrang;
+        this.tenNguoiNhan = tenNguoiNhan;
+        this.diaChi = diaChi;
+        this.sdt = sdt;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -148,5 +169,12 @@ public class HoaDon {
     public void setSdt(String sdt) {
         this.sdt = sdt;
     }
+
+    @Override
+    public String toString() {
+        return "HoaDon{" + "id=" + id + ", idKH=" + idKH + ", idNV=" + idNV + ", ma=" + ma + ", ngayTao=" + ngayTao + ", ngayThanhToan=" + ngayThanhToan + ", ngayShip=" + ngayShip + ", ngayNhan=" + ngayNhan + ", tinhTrang=" + tinhTrang + ", tenNguoiNhan=" + tenNguoiNhan + ", diaChi=" + diaChi + ", sdt=" + sdt + '}';
+    }
+
+   
 
 }

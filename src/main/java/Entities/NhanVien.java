@@ -5,12 +5,15 @@ import org.hibernate.annotations.Nationalized;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class NhanVien {
     @Id
-    @Column(name = "Id", nullable = false)
-    private UUID id;
+    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "Id", columnDefinition = "uniqueidentifier")
+    private String id;
 
     @Column(name = "Ma", length = 20)
     private String ma;
@@ -61,11 +64,31 @@ public class NhanVien {
     @Column(name = "TrangThai")
     private Integer trangThai;
 
-    public UUID getId() {
+    public NhanVien(String id, String ma, String ten, String tenDem, String ho, String gioiTinh, LocalDate ngaySinh, String diaChi, String sdt, String matKhau, CuaHang idCH, ChucVu idCV, NhanVien idGuiBC, Integer trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.tenDem = tenDem;
+        this.ho = ho;
+        this.gioiTinh = gioiTinh;
+        this.ngaySinh = ngaySinh;
+        this.diaChi = diaChi;
+        this.sdt = sdt;
+        this.matKhau = matKhau;
+        this.idCH = idCH;
+        this.idCV = idCV;
+        this.idGuiBC = idGuiBC;
+        this.trangThai = trangThai;
+    }
+
+    public NhanVien() {
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -172,5 +195,12 @@ public class NhanVien {
     public void setTrangThai(Integer trangThai) {
         this.trangThai = trangThai;
     }
+
+    @Override
+    public String toString() {
+        return "NhanVien{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", tenDem=" + tenDem + ", ho=" + ho + ", gioiTinh=" + gioiTinh + ", ngaySinh=" + ngaySinh + ", diaChi=" + diaChi + ", sdt=" + sdt + ", matKhau=" + matKhau + ", idCH=" + idCH + ", idCV=" + idCV + ", idGuiBC=" + idGuiBC + ", trangThai=" + trangThai + '}';
+    }
+
+  
 
 }

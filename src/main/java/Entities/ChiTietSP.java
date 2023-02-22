@@ -4,13 +4,15 @@ import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.UUID;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class ChiTietSP {
     @Id
-    @Column(name = "Id", nullable = false)
-    private UUID id;
+    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "Id", columnDefinition = "uniqueidentifier")
+    private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdSP")
@@ -44,11 +46,11 @@ public class ChiTietSP {
     @Column(name = "GiaBan", precision = 20)
     private BigDecimal giaBan;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -123,5 +125,27 @@ public class ChiTietSP {
     public void setGiaBan(BigDecimal giaBan) {
         this.giaBan = giaBan;
     }
+
+    public ChiTietSP() {
+    }
+
+    public ChiTietSP(String id, Product idSP, Nsx idNsx, MauSac idMauSac, DongSP idDongSP, Integer namBH, String moTa, Integer soLuongTon, BigDecimal giaNhap, BigDecimal giaBan) {
+        this.id = id;
+        this.idSP = idSP;
+        this.idNsx = idNsx;
+        this.idMauSac = idMauSac;
+        this.idDongSP = idDongSP;
+        this.namBH = namBH;
+        this.moTa = moTa;
+        this.soLuongTon = soLuongTon;
+        this.giaNhap = giaNhap;
+        this.giaBan = giaBan;
+    }
+
+    @Override
+    public String toString() {
+        return "ChiTietSP{" + "id=" + id + ", idSP=" + idSP + ", idNsx=" + idNsx + ", idMauSac=" + idMauSac + ", idDongSP=" + idDongSP + ", namBH=" + namBH + ", moTa=" + moTa + ", soLuongTon=" + soLuongTon + ", giaNhap=" + giaNhap + ", giaBan=" + giaBan + '}';
+    }
+    
 
 }

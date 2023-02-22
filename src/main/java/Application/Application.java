@@ -21,6 +21,6 @@ public class Application {
 //        new FrmChucVu().setVisible(true);
 //        new FrmCuaHang().setVisible(true);
 new FrmKhacHang().setVisible(true);
-//        new FrmDongSP().setVisible(true);
+//        new FrmDongSP().setVisible(true); 
     }
 }

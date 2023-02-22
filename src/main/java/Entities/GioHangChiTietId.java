@@ -6,30 +6,29 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 
 @Embeddable
 public class GioHangChiTietId implements Serializable {
     private static final long serialVersionUID = 7683475131705805993L;
     @Column(name = "IdGioHang", nullable = false)
-    private UUID idGioHang;
+    private String idGioHang;
 
     @Column(name = "IdChiTietSP", nullable = false)
-    private UUID idChiTietSP;
+    private String idChiTietSP;
 
-    public UUID getIdGioHang() {
+    public String getIdGioHang() {
         return idGioHang;
     }
 
-    public void setIdGioHang(UUID idGioHang) {
+    public void setIdGioHang(String idGioHang) {
         this.idGioHang = idGioHang;
     }
 
-    public UUID getIdChiTietSP() {
+    public String getIdChiTietSP() {
         return idChiTietSP;
     }
 
-    public void setIdChiTietSP(UUID idChiTietSP) {
+    public void setIdChiTietSP(String idChiTietSP) {
         this.idChiTietSP = idChiTietSP;
     }
 
