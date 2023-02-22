@@ -6,12 +6,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.UUID;
+import javax.persistence.GeneratedValue;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class DongSP {
-    @Id
-    @Column(name = "Id", nullable = false)
-    private UUID id;
+     @Id
+    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "Id", columnDefinition = "uniqueidentifier")
+    private String id;
 
     @Column(name = "Ma", length = 20)
     private String ma;
@@ -20,11 +24,20 @@ public class DongSP {
     @Column(name = "Ten", length = 30)
     private String ten;
 
-    public UUID getId() {
+    public DongSP() {
+    }
+
+    public DongSP(String id, String ma, String ten) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -44,4 +57,10 @@ public class DongSP {
         this.ten = ten;
     }
 
+    @Override
+    public String toString() {
+        return "DongSP{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + '}';
+    }
+
+   
 }

@@ -4,17 +4,24 @@
  */
 package Views;
 
+import Dto.KhachHangDTO;
+import Services.KhachHangService;
+import java.util.Date;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author hrska
  */
 public class FrmKhacHang extends javax.swing.JFrame {
-
+private KhachHangService service = new KhachHangService();
     /**
      * Creates new form FrmKhacHang
      */
     public FrmKhacHang() {
         initComponents();
+        loadTable();
     }
 
     /**
@@ -43,12 +50,12 @@ public class FrmKhacHang extends javax.swing.JFrame {
         txtInputTen = new javax.swing.JTextField();
         txtInputTenDem = new javax.swing.JTextField();
         txtInputHo = new javax.swing.JTextField();
-        txtInputNgaySinh = new javax.swing.JTextField();
         txtInputSDT = new javax.swing.JTextField();
         txtInputDiaChi = new javax.swing.JTextField();
         txtInputThanhPho = new javax.swing.JTextField();
         txtInputQuocGia = new javax.swing.JTextField();
         txtInputMatKhau = new javax.swing.JTextField();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,12 +118,6 @@ public class FrmKhacHang extends javax.swing.JFrame {
             }
         });
 
-        txtInputNgaySinh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtInputNgaySinhActionPerformed(evt);
-            }
-        });
-
         txtInputSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtInputSDTActionPerformed(evt);
@@ -165,7 +166,7 @@ public class FrmKhacHang extends javax.swing.JFrame {
                     .addComponent(txtInputTen, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtInputTenDem, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtInputHo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtInputNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -211,9 +212,9 @@ public class FrmKhacHang extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(txtInputMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtInputTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtInputTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -223,9 +224,9 @@ public class FrmKhacHang extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(txtInputHo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(txtInputNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
@@ -253,7 +254,56 @@ public class FrmKhacHang extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+private void loadTable(){
+    List<KhachHangDTO> list = service.getAll();
+    DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+    dtm.setRowCount(0);
+    System.out.println(list.size());
+    for (KhachHangDTO khachHang : list) {
+        
+        Object[] rowData = {
+            khachHang.getMa(),
+            khachHang.getTen(),
+            khachHang.getTenDem(),
+            khachHang.getHo(),
+            khachHang.getNgaySinh(),
+            khachHang.getMatKhau(),
+            khachHang.getDiaChi(),
+            khachHang.getThanhPho(),
+            khachHang.getQuocGia()
+        };
+        dtm.addRow(rowData);
+    }
+}
 
+private String getIDSelectRow(){
+    int selectRow = jTable1.getSelectedRow();
+    return jTable1.getValueAt(selectRow, 0).toString();
+}
+
+private KhachHangDTO getFormInput(){
+    KhachHangDTO khachHangDTO = new KhachHangDTO();
+    String ma = txtInputMa.getText();
+    String ten = txtInputTen.getName();
+    String tenDem = txtInputTenDem.getText();
+    String ho = txtInputHo.getText();
+    Date ngaySinh = jDateChooser2.getDate();
+    String matKhau = txtInputMatKhau.getText();
+    String diaChi = txtInputDiaChi.getText();
+    String thanhPho = txtInputThanhPho.getText();
+    String quocGia = txtInputQuocGia.getText();
+    
+    khachHangDTO.setMa(ma);
+    khachHangDTO.setTen(ten);
+    khachHangDTO.setTenDem(tenDem);
+    khachHangDTO.setHo(ho);
+    khachHangDTO.setNgaySinh(ngaySinh);
+    khachHangDTO.setMatKhau(matKhau);
+    khachHangDTO.setDiaChi(diaChi);
+    khachHangDTO.setThanhPho(thanhPho);
+    khachHangDTO.setQuocGia(quocGia);
+    return khachHangDTO;
+}
     private void txtInputMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInputMaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtInputMaActionPerformed
@@ -269,10 +319,6 @@ public class FrmKhacHang extends javax.swing.JFrame {
     private void txtInputHoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInputHoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtInputHoActionPerformed
-
-    private void txtInputNgaySinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInputNgaySinhActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtInputNgaySinhActionPerformed
 
     private void txtInputSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInputSDTActionPerformed
         // TODO add your handling code here:
@@ -298,38 +344,11 @@ public class FrmKhacHang extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmKhacHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmKhacHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmKhacHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmKhacHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmKhacHang().setVisible(true);
-            }
-        });
+     
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -347,7 +366,6 @@ public class FrmKhacHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtInputHo;
     private javax.swing.JTextField txtInputMa;
     private javax.swing.JTextField txtInputMatKhau;
-    private javax.swing.JTextField txtInputNgaySinh;
     private javax.swing.JTextField txtInputQuocGia;
     private javax.swing.JTextField txtInputSDT;
     private javax.swing.JTextField txtInputTen;

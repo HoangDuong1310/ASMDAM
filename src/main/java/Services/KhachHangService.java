@@ -30,7 +30,7 @@ public class KhachHangService implements IKhachHangService {
         khachHangDTO = new ArrayList<>();
         var khachHang = repo.findAll();
         for (KhachHang kh : khachHang) {
-
+            khachHangDTO.add(new KhachHangDTO(kh.getId(), kh.getMa(), kh.getTen(), kh.getTenDem(), kh.getHo(), kh.getNgaySinh(), kh.getSdt(), kh.getDiaChi(), kh.getThanhPho(), kh.getQuocGia(), kh.getMatKhau()));
         }
         return khachHangDTO;
     }

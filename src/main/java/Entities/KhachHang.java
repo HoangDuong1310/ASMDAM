@@ -4,11 +4,14 @@ import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.util.Date;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class KhachHang {
-    @Id
-    @Column(name = "Id", nullable = false)
+     @Id
+    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "Id", columnDefinition = "uniqueidentifier")
     private String id;
 
     @Column(name = "Ma", length = 20)
@@ -49,6 +52,9 @@ public class KhachHang {
     @Column(name = "MatKhau")
     private String matKhau;
 
+    public KhachHang() {
+    }
+
     public KhachHang(String id, String ma, String ten, String tenDem, String ho, Date ngaySinh, String sdt, String diaChi, String thanhPho, String quocGia, String matKhau) {
         this.id = id;
         this.ma = ma;
@@ -61,9 +67,6 @@ public class KhachHang {
         this.thanhPho = thanhPho;
         this.quocGia = quocGia;
         this.matKhau = matKhau;
-    }
-
-    public KhachHang() {
     }
 
     public String getId() {
@@ -159,6 +162,6 @@ public class KhachHang {
         return "KhachHang{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", tenDem=" + tenDem + ", ho=" + ho + ", ngaySinh=" + ngaySinh + ", sdt=" + sdt + ", diaChi=" + diaChi + ", thanhPho=" + thanhPho + ", quocGia=" + quocGia + ", matKhau=" + matKhau + '}';
     }
 
-   
+    
 
 }

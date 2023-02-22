@@ -3,6 +3,7 @@ package Utilities;
 
 import Entities.ChucVu;
 import Entities.CuaHang;
+import Entities.DongSP;
 import Entities.KhachHang;
 import Entities.MauSac;
 import Entities.NhanVien;
@@ -46,6 +47,7 @@ public class DuongUtil {
                 conf.addAnnotatedClass(CuaHang.class);
                 conf.addAnnotatedClass(NhanVien.class);
                 conf.addAnnotatedClass(KhachHang.class);
+                conf.addAnnotatedClass(DongSP.class);
 		ServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
 		FACTORY = conf.buildSessionFactory(registry);
 
